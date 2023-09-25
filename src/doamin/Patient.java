@@ -2,13 +2,32 @@ package doamin;
 
 public class Patient {
     String name;
+    int age;
 
-    public Patient(String name, int age) {
+    int id;
+
+    public Patient(int id,String name, int age) {
+        this.id = id;
         this.name = name;
         this.age = age;
     }
 
-    int age;
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", id=" + id +
+                '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

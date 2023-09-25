@@ -14,8 +14,8 @@ public class AppointmentDao {
     private static AppointmentDao appointmentDao;
 
 
-    private Map<Patient,List<Appointment>> patientAppointmentHashMap;
-    private Map<Doctor, List<Appointment>> doctorAppointmentHashMap;
+    private final Map<Patient,List<Appointment>> patientAppointmentHashMap;
+    private final Map<Doctor, List<Appointment>> doctorAppointmentHashMap;
 
     private AppointmentDao(){
         patientAppointmentHashMap = new HashMap<>();

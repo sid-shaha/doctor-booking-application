@@ -4,6 +4,7 @@ import service.RegisterationService;
 import service.SearchService;
 import service.impl.DefaultSearchService;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,47 +43,51 @@ public class Main {
         SearchService searchService = new DefaultSearchService();
         AppointmentService appointmentService = new AppointmentService();
 
-
         // Doctor registeration
 
         List<Slot> slots = new ArrayList<>();
-        Doctor doctor = new Doctor(String.valueOf(Speciality.Dermatologist),30,"Sid",slots);
+        Doctor doctor = new Doctor(Speciality.Dermatologist,1,30,"Sid");
         registerationService.registerDoctor(doctor);
 
         //Patient registration
-        Patient patient = new Patient("patientA",21);
+        Patient patient = new Patient(1,"patientA",21);
         registerationService.registerPatient(patient);
 
         // Doctor hours registeration
         Slot slot = new Slot("Monday",11,12);
         slots.add(slot);
-        // registerationService. (doctor,slots);
+        registerationService.registerDoctorsAvailablility(doctor.getId(),slots);
 
-        System.out.println("Doctors slots "+doctor.getSlots());
+        // Print Doctor Details
+        System.out.println("Doctor details "+doctor.toString());
+
         // Book Appointment
-        appointmentService.bookAppointment(doctor,patient,slot);
+        appointmentService.bookAppointment(doctor.getId(),patient.getId(),slot);
 
-        // check appointments
-        List<Appointment> appointments = appointmentService.getPatientAppointment(patient);
+
+        // view patients appointments
+        List<Appointment> appointments = appointmentService.getPatientAppointment(patient.getId());
         System.out.println("Patients Appointments");
         for(int i=0;i<appointments.size();i++){
-            System.out.println(appointments.get(i).getPatient().getName());
+            System.out.println(appointments.get(i).toString());
         }
 
-
-        List<Appointment> docAppointments = appointmentService.getDoctorBookedAppointment(doctor);
+        // view doctor appointments
+        List<Appointment> docAppointments = appointmentService.getDoctorBookedAppointment(doctor.getId());
         System.out.println("Doctors Appointments");
         for(int i=0;i<docAppointments.size();i++){
-            System.out.println(docAppointments.get(i).getDoctor().getSlots());
+            System.out.println(docAppointments.get(i).toString());
         }
 
        // Search doctor based on speciality
-        String speciality = String.valueOf(Speciality.Dermatologist);
+        Speciality speciality = Speciality.Dermatologist;
         System.out.println(speciality);
 
-        //
         List<Doctor> doctors = searchService.search(speciality);
         // HashMap<Doctor, List<Slot>> doctorSlotHashMap = searchService.search(speciality);
+        for(int i=0;i<doctors.size();i++){
+            System.out.println(doctors.get(i).toString());
+        }
 
         System.out.println("Hello world!");
     }

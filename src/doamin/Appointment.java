@@ -1,6 +1,7 @@
 package doamin;
 
 public class Appointment {
+
     private Doctor doctor;
     private Patient patient;
     private Slot slot;
@@ -11,6 +12,16 @@ public class Appointment {
         this.patient = patient;
         this.slot = slot;
         AppointmentStatus = appointmentStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "doctor=" + doctor +
+                ", patient=" + patient +
+                ", slot=" + slot +
+                ", AppointmentStatus='" + AppointmentStatus + '\'' +
+                '}';
     }
 
     public Doctor getDoctor() {

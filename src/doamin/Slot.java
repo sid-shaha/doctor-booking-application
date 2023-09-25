@@ -1,6 +1,8 @@
 package doamin;
 
 
+import java.util.Objects;
+
 public class Slot {
     private String day;
     private int start_time;
@@ -12,7 +14,27 @@ public class Slot {
         this.end_time = end_time;
     }
 
+    @Override
+    public String toString() {
+        return "Slot{" +
+                "day='" + day + '\'' +
+                ", start_time=" + start_time +
+                ", end_time=" + end_time +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Slot slot = (Slot) o;
+        return start_time == slot.start_time && end_time == slot.end_time && Objects.equals(day, slot.day);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(day, start_time, end_time);
+    }
 
     public String getDay() {
         return day;

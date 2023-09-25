@@ -17,7 +17,9 @@ public class RegisterationService {
         PatientDao patientDao = PatientDao.getPatientDao();
         patientDao.addPatient(patient);
     }
-    public void registerDoctorsAvailablility(Doctor doctor, List<Slot> slots){
+    public void registerDoctorsAvailablility(int doctorId, List<Slot> slots){
+        DoctorDao doctorDao = DoctorDao.getDoctorDao();
+        Doctor doctor = doctorDao.getDoctorById(doctorId);
         doctor.setSlots(slots);
     }
 }
